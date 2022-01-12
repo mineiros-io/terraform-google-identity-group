@@ -42,8 +42,8 @@ variable "initial_group_config" {
   default     = "EMPTY"
 
   validation {
-    condition     = var.initial_group_config == null ? true : contains(["INITIAL_GROUP_CONFIG_UNSPECIFIED", "WITH_INITIAL_OWNER", "EMPTY"], var.initial_group_config)
-    error_message = "The value must only be one of these valid values: INITIAL_GROUP_CONFIG_UNSPECIFIED, WITH_INITIAL_OWNER, and EMPTY."
+    condition     = contains(["WITH_INITIAL_OWNER", "EMPTY"], var.initial_group_config)
+    error_message = "The value must only be one of these valid values: WITH_INITIAL_OWNER, and EMPTY."
   }
 }
 

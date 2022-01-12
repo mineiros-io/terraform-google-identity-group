@@ -16,6 +16,13 @@ resource "google_cloud_identity_group" "group" {
 
   labels = var.labels
 
+  lifecycle {
+    ignore_changes = [
+      # Initial group config can only be configured when creating a group initially
+      initial_group_config,
+    ]
+  }
+
   timeouts {
     create = try(var.group_timeouts.create, "6m")
     update = try(var.group_timeouts.update, "4m")
