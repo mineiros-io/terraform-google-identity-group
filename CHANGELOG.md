@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Remove `INITIAL_GROUP_CONFIG_UNSPECIFIED` as an option from `initial_group_config` since
+  Google recommends to not use it as written in
+  https://cloud.google.com/identity/docs/reference/rest/v1beta1/groups/create#initialgroupconfig
+
 ## [0.0.2]
 
 ### Added
@@ -19,10 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial Implementation
 
-<!-- markdown-link-check-disable -->
-
 [unreleased]: https://github.com/mineiros-io/terraform-google-identity-group/compare/v0.0.2...HEAD
 [0.0.2]: https://github.com/mineiros-io/terraform-google-identity-group/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/mineiros-io/terraform-google-identity-group/releases/tag/v0.0.1
-
-<!-- markdown-link-check-disabled -->
