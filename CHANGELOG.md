@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Ignore lifecycle changes in `initial_group_config`
+
 ### Changed
 
 - Remove `INITIAL_GROUP_CONFIG_UNSPECIFIED` as an option from `initial_group_config` since
