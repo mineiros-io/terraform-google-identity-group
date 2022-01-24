@@ -287,19 +287,28 @@ section {
     title   = "Module Outputs"
     content = <<-END
       The following attributes are exported in the outputs of the module:
-
-      - **`group`**
-
-        All attributes of the created 'google_cloud_identity_group' resource.
-
-      - **`membership`**
-
-        All attributes of the created 'google_cloud_identity_group_membership' resource.
-
-      - **`module_enabled`**
-
-        Whether this module is enabled.
     END
+
+    output "group" {
+      type        = object(group)
+      description = <<-END
+        All attributes of the created 'google_cloud_identity_group' resource.
+      END
+    }
+
+    output "membership" {
+      type        = object(membership)
+      description = <<-END
+        All attributes of the created 'google_cloud_identity_group_membership' resource.
+      END
+    }
+
+    output "module_enabled" {
+      type        = bool
+      description = <<-END
+        Whether this module is enabled.
+      END
+    }
   }
 
   section {
