@@ -292,14 +292,14 @@ section {
     output "group" {
       type        = object(group)
       description = <<-END
-        All attributes of the created 'google_cloud_identity_group' resource.
+        All attributes of the created `google_cloud_identity_group` resource.
       END
     }
 
     output "membership" {
       type        = object(membership)
       description = <<-END
-        All attributes of the created 'google_cloud_identity_group_membership' resource.
+        All attributes of the created `google_cloud_identity_group_membership` resource.
       END
     }
 
