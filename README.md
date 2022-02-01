@@ -220,15 +220,15 @@ See [variables.tf] and [examples/] for details and use-cases.
 
 The following attributes are exported in the outputs of the module:
 
-- **`group`**
+- [**`group`**](#output-group): *(`object(group)`)*<a name="output-group"></a>
 
   All attributes of the created 'google_cloud_identity_group' resource.
 
-- **`membership`**
+- [**`membership`**](#output-membership): *(`object(membership)`)*<a name="output-membership"></a>
 
   All attributes of the created 'google_cloud_identity_group_membership' resource.
 
-- **`module_enabled`**
+- [**`module_enabled`**](#output-module_enabled): *(`bool`)*<a name="output-module_enabled"></a>
 
   Whether this module is enabled.
 
