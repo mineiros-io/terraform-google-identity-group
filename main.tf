@@ -35,7 +35,7 @@ locals {
 }
 
 resource "google_cloud_identity_group_membership" "membership" {
-  for_each = var.module_enabled ? local.memberships : tomap({})
+  for_each = var.module_enabled ? local.memberships : {}
 
   group = google_cloud_identity_group.group[0].id
 

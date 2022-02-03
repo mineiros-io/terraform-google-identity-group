@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Fixed
+
+- Remove broken `tomap` in memberships
+
 ## [0.0.3]
 
 ### Added
