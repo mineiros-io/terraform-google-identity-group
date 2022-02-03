@@ -74,69 +74,141 @@ section {
   }
 
   section {
-    title   = "Module Argument Reference"
-    content = <<-END
-      See [variables.tf] and [examples/] for details and use-cases.
-    END
+    title = "Main Resource Configuration"
 
-    section {
-      title = "Main Resource Configuration"
+    variable "group_key_id" {
+      required    = true
+      type        = string
+      description = <<-END
+        The ID of the entity. For Google-managed entities, the id must be the email address of an existing group or user. For external-identity-mapped entities, the id must be a string conforming to the Identity Source's requirements. Must be unique within a namespace.
+      END
 
-      variable "group_key_id" {
+    }
+
+    variable "parent" {
+      required    = true
+      type        = string
+      description = <<-END
+        The resource name of the entity under which this Group resides in the Cloud Identity resource hierarchy. Must be of the form `identitysources/{identity_source_id}` for external-identity-mapped groups or `customers/{customer_id}` for Google Groups.
+      END
+    }
+
+    variable "labels" {
+      type        = map(string)
+      default     = { "cloudidentity.googleapis.com/groups.discussion_forum" : "" }
+      description = <<-END
+        The labels that apply to the Group.Must not contain more than one entry.Must contain the entry `cloudidentity.googleapis.com/groups.discussion_forum`: '' if the Group is a Google Group or `system/groups/external`: '' if the Group is an external-identity-mapped group.
+      END
+    }
+
+    variable "display_name" {
+      type        = string
+      description = <<-END
+        The display name of the Group.
+      END
+    }
+
+    variable "description" {
+      type        = string
+      description = <<-END
+        An extended description to help users determine the purpose of a Group. Must not be longer than 4,096 characters.
+      END
+    }
+
+    variable "initial_group_config" {
+      type        = string
+      default     = "EMPTY"
+      description = <<-END
+        The initial configuration options for creating a Group. Default value is `EMPTY`. Possible values are `INITIAL_GROUP_CONFIG_UNSPECIFIED`, `WITH_INITIAL_OWNER`, and `EMPTY`.
+      END
+    }
+
+    variable "group_key_namespace" {
+      type        = string
+      description = <<-END
+        The namespace in which the entity exists. If not specified, the EntityKey represents a Google-managed entity such as a Google user or a Google Group. If specified, the EntityKey represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source_id}`.
+      END
+    }
+
+    variable "group_timeouts" {
+      type        = object(group_timeout)
+      default     = {}
+      description = <<-END
+        How long certain operations are allowed to take before being considered to have failed.
+      END
+
+      readme_example = <<-END
+        group_timeouts = {
+          create = "4m"
+          update = "4m"
+          delete = "4m"
+        }
+      END
+
+      attribute "create" {
+        type        = string
+        default     = "6m"
+        description = <<-END
+          Timeout for create operations.
+        END
+      }
+
+      attribute "update" {
+        type        = string
+        default     = "4m"
+        description = <<-END
+          Timeout for update operations.
+        END
+      }
+
+      attribute "delete" {
+        type        = string
+        default     = "4m"
+        description = <<-END
+          Timeout for delete operations.
+        END
+      }
+    }
+
+    variable "memberships" {
+      type        = list(membership)
+      description = <<-END
+        A list of memberships (id, roles) to get attached to the group resource created.
+      END
+      default     = []
+
+      attribute "roles" {
         required    = true
-        type        = string
+        type        = list(role)
         description = <<-END
-          The ID of the entity. For Google-managed entities, the id must be the email address of an existing group or user. For external-identity-mapped entities, the id must be a string conforming to the Identity Source's requirements. Must be unique within a namespace.
+          The MembershipRoles that apply to the Membership. Must not contain duplicate MembershipRoles with the same name.
         END
 
+        attribute "name" {
+          required    = true
+          type        = string
+          description = <<-END
+            The name of the MembershipRole. Must be one of `OWNER`, `MANAGER, `MEMBER`. Possible values are `OWNER`, `MANAGER`, and `MEMBER`.
+          END
+        }
       }
 
-      variable "parent" {
-        required    = true
-        type        = string
+      attribute "preferred_member_key " {
+        type        = object(preferred_member_key)
         description = <<-END
-          The resource name of the entity under which this Group resides in the Cloud Identity resource hierarchy. Must be of the form `identitysources/{identity_source_id}` for external-identity-mapped groups or `customers/{customer_id}` for Google Groups.
+          EntityKey of the member.
         END
+
+        attribute "id" {
+          required    = true
+          type        = string
+          description = <<-END
+            The ID of the entity. For Google-managed entities, the id must be the email address of an existing group or user. For external-identity-mapped entities, the id must be a string conforming to the Identity Source's requirements. Must be unique within a namespace.
+          END
+        }
       }
 
-      variable "labels" {
-        type        = map(string)
-        default     = { "cloudidentity.googleapis.com/groups.discussion_forum" : "" }
-        description = <<-END
-          The labels that apply to the Group.Must not contain more than one entry.Must contain the entry `cloudidentity.googleapis.com/groups.discussion_forum`: '' if the Group is a Google Group or `system/groups/external`: '' if the Group is an external-identity-mapped group.
-        END
-      }
-
-      variable "display_name" {
-        type        = string
-        description = <<-END
-          The display name of the Group.
-        END
-      }
-
-      variable "description" {
-        type        = string
-        description = <<-END
-          An extended description to help users determine the purpose of a Group. Must not be longer than 4,096 characters.
-        END
-      }
-
-      variable "initial_group_config" {
-        type        = string
-        default     = "EMPTY"
-        description = <<-END
-          The initial configuration options for creating a Group. Default value is `EMPTY`. Possible values are `INITIAL_GROUP_CONFIG_UNSPECIFIED`, `WITH_INITIAL_OWNER`, and `EMPTY`.
-        END
-      }
-
-      variable "group_key_namespace" {
-        type        = string
-        description = <<-END
-          The namespace in which the entity exists. If not specified, the EntityKey represents a Google-managed entity such as a Google user or a Google Group. If specified, the EntityKey represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source_id}`.
-        END
-      }
-
-      variable "group_timeouts" {
+      attribute "membership_timeouts" {
         type        = object(group_timeout)
         default     = {}
         description = <<-END
@@ -144,7 +216,7 @@ section {
         END
 
         readme_example = <<-END
-          group_timeouts = {
+        group_timeouts = {
             create = "4m"
             update = "4m"
             delete = "4m"
@@ -153,7 +225,7 @@ section {
 
         attribute "create" {
           type        = string
-          default     = "6m"
+          default     = "4m"
           description = <<-END
             Timeout for create operations.
           END
@@ -175,111 +247,32 @@ section {
           END
         }
       }
+    }
+  }
 
-      variable "memberships" {
-        type        = list(membership)
-        description = <<-END
-          A list of memberships (id, roles) to get attached to the group resource created.
-        END
-        default     = []
+  section {
+    title = "Module Configuration"
 
-        attribute "roles" {
-          required    = true
-          type        = list(role)
-          description = <<-END
-            The MembershipRoles that apply to the Membership. Must not contain duplicate MembershipRoles with the same name.
-          END
-
-          attribute "name" {
-            required    = true
-            type        = string
-            description = <<-END
-              The name of the MembershipRole. Must be one of `OWNER`, `MANAGER, `MEMBER`. Possible values are `OWNER`, `MANAGER`, and `MEMBER`.
-            END
-          }
-        }
-
-        attribute "preferred_member_key " {
-          type        = object(preferred_member_key)
-          description = <<-END
-            EntityKey of the member.
-          END
-
-          attribute "id" {
-            required    = true
-            type        = string
-            description = <<-END
-              The ID of the entity. For Google-managed entities, the id must be the email address of an existing group or user. For external-identity-mapped entities, the id must be a string conforming to the Identity Source's requirements. Must be unique within a namespace.
-            END
-          }
-        }
-
-        attribute "membership_timeouts" {
-          type        = object(group_timeout)
-          default     = {}
-          description = <<-END
-            How long certain operations are allowed to take before being considered to have failed.
-          END
-
-          readme_example = <<-END
-          group_timeouts = {
-              create = "4m"
-              update = "4m"
-              delete = "4m"
-            }
-          END
-
-          attribute "create" {
-            type        = string
-            default     = "4m"
-            description = <<-END
-              Timeout for create operations.
-            END
-          }
-
-          attribute "update" {
-            type        = string
-            default     = "4m"
-            description = <<-END
-              Timeout for update operations.
-            END
-          }
-
-          attribute "delete" {
-            type        = string
-            default     = "4m"
-            description = <<-END
-              Timeout for delete operations.
-            END
-          }
-        }
-      }
+    variable "module_enabled" {
+      type        = bool
+      default     = true
+      description = <<-END
+        Specifies whether resources in the module will be created.
+      END
     }
 
-    section {
-      title = "Module Configuration"
-
-      variable "module_enabled" {
-        type        = bool
-        default     = true
-        description = <<-END
-          Specifies whether resources in the module will be created.
-        END
-      }
-
-      variable "module_depends_on" {
-        type           = list(dependency)
-        description    = <<-END
-          A list of dependencies.
-          Any object can be _assigned_ to this list to define a hidden external dependency.
-        END
-        default        = []
-        readme_example = <<-END
-          module_depends_on = [
-            null_resource.name
-          ]
-        END
-      }
+    variable "module_depends_on" {
+      type           = list(dependency)
+      description    = <<-END
+        A list of dependencies.
+        Any object can be _assigned_ to this list to define a hidden external dependency.
+      END
+      default        = []
+      readme_example = <<-END
+        module_depends_on = [
+          null_resource.name
+        ]
+      END
     }
   }
 
