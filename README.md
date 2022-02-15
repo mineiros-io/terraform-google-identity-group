@@ -54,6 +54,15 @@ module "terraform-google-identity-group" {
   parent       = "resource-name-of-entity"
 }
 ```
+**NOTE:** Google Groups are an organization level resource and can only be created and managed
+with Service Accounts or with a Principal that impersonates a single service account.
+The Service Account will require to be a Google Groups Admin to be able to create the Google
+Groups and manage the addition, removal of users/service accounts to and from the group.
+There are two different ways of enabaling a service account to work with the Google Groups API:
+  - [Authenticating as a service account without domain-wide delegation (recommended)](https://cloud.google.com/identity/docs/how-to/setup#assigning_an_admin_role_to_the_service_account)
+  - [Authenticating as a service account with domain-wide delegation](https://cloud.google.com/identity/docs/how-to/setup#assigning_an_admin_role_to_the_service_account)
+Granting a service account access to your organisation's data via domain-wide delegation should be used with caution.
+It can be reversed by disabling or deleting the service account or by removing access through the Google Workspace admin console.
 
 ## Module Argument Reference
 
@@ -222,11 +231,11 @@ The following attributes are exported in the outputs of the module:
 
 - [**`group`**](#output-group): *(`object(group)`)*<a name="output-group"></a>
 
-  All attributes of the created 'google_cloud_identity_group' resource.
+  All attributes of the created `google_cloud_identity_group` resource.
 
 - [**`membership`**](#output-membership): *(`object(membership)`)*<a name="output-membership"></a>
 
-  All attributes of the created 'google_cloud_identity_group_membership' resource.
+  All attributes of the created `google_cloud_identity_group_membership` resource.
 
 - [**`module_enabled`**](#output-module_enabled): *(`bool`)*<a name="output-module_enabled"></a>
 

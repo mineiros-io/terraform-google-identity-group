@@ -70,9 +70,17 @@ section {
         parent       = "resource-name-of-entity"
       }
       ```
+      **NOTE:** Google Groups are an organization level resource and can only be created and managed
+      with Service Accounts or with a Principal that impersonates a single service account.
+      The Service Account will require to be a Google Groups Admin to be able to create the Google
+      Groups and manage the addition, removal of users/service accounts to and from the group.
+      There are two different ways of enabaling a service account to work with the Google Groups API:
+        - [Authenticating as a service account without domain-wide delegation (recommended)](https://cloud.google.com/identity/docs/how-to/setup#assigning_an_admin_role_to_the_service_account)
+        - [Authenticating as a service account with domain-wide delegation](https://cloud.google.com/identity/docs/how-to/setup#assigning_an_admin_role_to_the_service_account)
+      Granting a service account access to your organisation's data via domain-wide delegation should be used with caution.
+      It can be reversed by disabling or deleting the service account or by removing access through the Google Workspace admin console.
     END
   }
-
   section {
     title   = "Module Argument Reference"
     content = <<-END

@@ -6,6 +6,10 @@ on:
       - main
   pull_request:
 
+env:
+  GOOGLE_CREDENTIALS: ${{ secrets.MINEIROS_TESTING_GCP_ORGANIZATION_ADMIN_SA_KEY_FILE }}
+  TF_VAR_domain: ${{ secrets.MINEIROS_TESTING_GCP_ORGANIZATION_DOMAIN }}
+
 concurrency:
   group: terraform-google-identity-group
   cancel-in-progress: false
@@ -20,3 +24,14 @@ jobs:
 
       - name: Run pre-commit
         run: make test/pre-commit
+
+  unit-tests:
+    needs: pre-commit
+    runs-on: ubuntu-latest
+    name: Unit Tests
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run Unit Tests
+        run: make test/unit-tests
