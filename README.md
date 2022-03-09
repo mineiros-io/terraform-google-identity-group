@@ -146,25 +146,16 @@ See [variables.tf] and [examples/] for details and use-cases.
 
   Each `membership` object in the list accepts the following attributes:
 
-  - [**`roles`**](#attr-memberships-roles): *(**Required** `list(role)`)*<a name="attr-memberships-roles"></a>
+  - [**`roles`**](#attr-memberships-roles): *(**Required** `list(string)`)*<a name="attr-memberships-roles"></a>
 
-    The MembershipRoles that apply to the Membership. Must not contain duplicate MembershipRoles with the same name.
+    A list of roles to bind to this Membership. Possible values are `OWNER`, `MANAGER`, and `MEMBER`.
+    **Note:** The `OWNER` and `MANAGER` roles are supplementary roles that the `MEMBER` role to be assigned.
 
-    Each `role` object in the list accepts the following attributes:
+    Example:
 
-    - [**`name`**](#attr-memberships-roles-name): *(**Required** `string`)*<a name="attr-memberships-roles-name"></a>
-
-      The name of the MembershipRole. Must be one of `OWNER`, `MANAGER, `MEMBER`. Possible values are `OWNER`, `MANAGER`, and `MEMBER`.
-
-  - [**`preferred_member_key `**](#attr-memberships-preferred_member_key ): *(Optional `object(preferred_member_key)`)*<a name="attr-memberships-preferred_member_key "></a>
-
-    EntityKey of the member.
-
-    The `preferred_member_key` object accepts the following attributes:
-
-    - [**`id`**](#attr-memberships-preferred_member_key -id): *(**Required** `string`)*<a name="attr-memberships-preferred_member_key -id"></a>
-
-      The ID of the entity. For Google-managed entities, the id must be the email address of an existing group or user. For external-identity-mapped entities, the id must be a string conforming to the Identity Source's requirements. Must be unique within a namespace.
+    ```hcl
+    roles = ["MEMBER", "MANAGER"]
+    ```
 
   - [**`membership_timeouts`**](#attr-memberships-membership_timeouts): *(Optional `object(group_timeout)`)*<a name="attr-memberships-membership_timeouts"></a>
 
