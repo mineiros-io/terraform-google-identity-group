@@ -64,7 +64,7 @@ section {
 
       ```hcl
       module "terraform-google-identity-group" {
-        source = "git@github.com:mineiros-io/terraform-google-identity-group.git?ref=v0.0.3"
+        source = "git@github.com:mineiros-io/terraform-google-identity-group.git?ref=v0.0.4"
 
         group_key_id = "id-of-entity"
         parent       = "resource-name-of-entity"
