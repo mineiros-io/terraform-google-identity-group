@@ -102,42 +102,6 @@ See [variables.tf] and [examples/] for details and use-cases.
 
   The namespace in which the entity exists. If not specified, the EntityKey represents a Google-managed entity such as a Google user or a Google Group. If specified, the EntityKey represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source_id}`.
 
-- [**`group_timeouts`**](#var-group_timeouts): *(Optional `object(group_timeout)`)*<a name="var-group_timeouts"></a>
-
-  How long certain operations are allowed to take before being considered to have failed.
-
-  Default is `{}`.
-
-  Example:
-
-  ```hcl
-  group_timeouts = {
-    create = "4m"
-    update = "4m"
-    delete = "4m"
-  }
-  ```
-
-  The `group_timeout` object accepts the following attributes:
-
-  - [**`create`**](#attr-group_timeouts-create): *(Optional `string`)*<a name="attr-group_timeouts-create"></a>
-
-    Timeout for create operations.
-
-    Default is `"6m"`.
-
-  - [**`update`**](#attr-group_timeouts-update): *(Optional `string`)*<a name="attr-group_timeouts-update"></a>
-
-    Timeout for update operations.
-
-    Default is `"4m"`.
-
-  - [**`delete`**](#attr-group_timeouts-delete): *(Optional `string`)*<a name="attr-group_timeouts-delete"></a>
-
-    Timeout for delete operations.
-
-    Default is `"4m"`.
-
 - [**`memberships`**](#var-memberships): *(Optional `list(membership)`)*<a name="var-memberships"></a>
 
   A list of memberships (id, roles) to get attached to the group resource created.
@@ -157,42 +121,6 @@ See [variables.tf] and [examples/] for details and use-cases.
     roles = ["MEMBER", "MANAGER"]
     ```
 
-  - [**`membership_timeouts`**](#attr-memberships-membership_timeouts): *(Optional `object(group_timeout)`)*<a name="attr-memberships-membership_timeouts"></a>
-
-    How long certain operations are allowed to take before being considered to have failed.
-
-    Default is `{}`.
-
-    Example:
-
-    ```hcl
-    group_timeouts = {
-        create = "4m"
-        update = "4m"
-        delete = "4m"
-      }
-    ```
-
-    The `group_timeout` object accepts the following attributes:
-
-    - [**`create`**](#attr-memberships-membership_timeouts-create): *(Optional `string`)*<a name="attr-memberships-membership_timeouts-create"></a>
-
-      Timeout for create operations.
-
-      Default is `"4m"`.
-
-    - [**`update`**](#attr-memberships-membership_timeouts-update): *(Optional `string`)*<a name="attr-memberships-membership_timeouts-update"></a>
-
-      Timeout for update operations.
-
-      Default is `"4m"`.
-
-    - [**`delete`**](#attr-memberships-membership_timeouts-delete): *(Optional `string`)*<a name="attr-memberships-membership_timeouts-delete"></a>
-
-      Timeout for delete operations.
-
-      Default is `"4m"`.
-
 ### Module Configuration
 
 - [**`module_enabled`**](#var-module_enabled): *(Optional `bool`)*<a name="var-module_enabled"></a>
@@ -200,6 +128,45 @@ See [variables.tf] and [examples/] for details and use-cases.
   Specifies whether resources in the module will be created.
 
   Default is `true`.
+
+- [**`module_timeouts`**](#var-module_timeouts): *(Optional `map(timeout)`)*<a name="var-module_timeouts"></a>
+
+  A map of timeout objects that is keyed by Terraform resource name
+  defining timeouts for `create`, `update` and `delete` Terraform operations.
+  Supported resources are:
+  - `google_cloud_identity_group`
+  - `google_cloud_identity_group_membership`
+
+  Example:
+
+  ```hcl
+  module_timeouts = {
+    google_cloud_identity_group = {
+      create = "4m"
+      update = "4m"
+      delete = "4m"
+    }
+    google_cloud_identity_group_membership = {
+      create = "4m"
+      update = "4m"
+      delete = "4m"
+    }
+  }
+  ```
+
+  Each `timeout` object in the map accepts the following attributes:
+
+  - [**`create`**](#attr-module_timeouts-create): *(Optional `string`)*<a name="attr-module_timeouts-create"></a>
+
+    Timeout for create operations.
+
+  - [**`update`**](#attr-module_timeouts-update): *(Optional `string`)*<a name="attr-module_timeouts-update"></a>
+
+    Timeout for update operations.
+
+  - [**`delete`**](#attr-module_timeouts-delete): *(Optional `string`)*<a name="attr-module_timeouts-delete"></a>
+
+    Timeout for delete operations.
 
 - [**`module_depends_on`**](#var-module_depends_on): *(Optional `list(dependency)`)*<a name="var-module_depends_on"></a>
 

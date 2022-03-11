@@ -144,46 +144,6 @@ section {
         END
       }
 
-      variable "group_timeouts" {
-        type        = object(group_timeout)
-        default     = {}
-        description = <<-END
-          How long certain operations are allowed to take before being considered to have failed.
-        END
-
-        readme_example = <<-END
-          group_timeouts = {
-            create = "4m"
-            update = "4m"
-            delete = "4m"
-          }
-        END
-
-        attribute "create" {
-          type        = string
-          default     = "6m"
-          description = <<-END
-            Timeout for create operations.
-          END
-        }
-
-        attribute "update" {
-          type        = string
-          default     = "4m"
-          description = <<-END
-            Timeout for update operations.
-          END
-        }
-
-        attribute "delete" {
-          type        = string
-          default     = "4m"
-          description = <<-END
-            Timeout for delete operations.
-          END
-        }
-      }
-
       variable "memberships" {
         type        = list(membership)
         description = <<-END
@@ -203,46 +163,6 @@ section {
           roles = ["MEMBER", "MANAGER"]
         END
         }
-
-        attribute "membership_timeouts" {
-          type        = object(group_timeout)
-          default     = {}
-          description = <<-END
-            How long certain operations are allowed to take before being considered to have failed.
-          END
-
-          readme_example = <<-END
-          group_timeouts = {
-              create = "4m"
-              update = "4m"
-              delete = "4m"
-            }
-          END
-
-          attribute "create" {
-            type        = string
-            default     = "4m"
-            description = <<-END
-              Timeout for create operations.
-            END
-          }
-
-          attribute "update" {
-            type        = string
-            default     = "4m"
-            description = <<-END
-              Timeout for update operations.
-            END
-          }
-
-          attribute "delete" {
-            type        = string
-            default     = "4m"
-            description = <<-END
-              Timeout for delete operations.
-            END
-          }
-        }
       }
     }
 
@@ -255,6 +175,52 @@ section {
         description = <<-END
           Specifies whether resources in the module will be created.
         END
+      }
+
+      variable "module_timeouts" {
+        type           = map(timeout)
+        description    = <<-END
+          A map of timeout objects that is keyed by Terraform resource name
+          defining timeouts for `create`, `update` and `delete` Terraform operations.
+          Supported resources are:
+          - `google_cloud_identity_group`
+          - `google_cloud_identity_group_membership`
+        END
+        readme_example = <<-END
+          module_timeouts = {
+            google_cloud_identity_group = {
+              create = "4m"
+              update = "4m"
+              delete = "4m"
+            }
+            google_cloud_identity_group_membership = {
+              create = "4m"
+              update = "4m"
+              delete = "4m"
+            }
+          }
+        END
+
+        attribute "create" {
+          type        = string
+          description = <<-END
+            Timeout for create operations.
+          END
+        }
+
+        attribute "update" {
+          type        = string
+          description = <<-END
+            Timeout for update operations.
+          END
+        }
+
+        attribute "delete" {
+          type        = string
+          description = <<-END
+            Timeout for delete operations.
+          END
+        }
       }
 
       variable "module_depends_on" {

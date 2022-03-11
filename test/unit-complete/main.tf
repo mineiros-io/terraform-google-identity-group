@@ -49,13 +49,18 @@ module "test" {
   ]
 
   # add most/all other optional arguments
-  # module_timeouts = {
-  #   group_timeouts = {
-  #     create = "10m"
-  #     update = "10m"
-  #     delete = "10m"
-  #   }
-  # }
+  module_timeouts = {
+    google_cloud_identity_group = {
+      create = "10m"
+      update = "11m"
+      delete = "12m"
+    }
+    google_cloud_identity_group_membership = {
+      create = "13m"
+      update = "14m"
+      delete = "15m"
+    }
+  }
 
   module_depends_on = ["nothing"]
 }

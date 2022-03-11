@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- BREAKING: Refactored `group_timeouts` and `membership_timeouts` to `module_timeouts`
+
 ## Fixed
 
 - Correct docs for memberships

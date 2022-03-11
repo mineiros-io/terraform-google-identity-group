@@ -53,12 +53,6 @@ variable "group_key_namespace" {
   default     = null
 }
 
-variable "group_timeouts" {
-  description = "(Optional) How long certain operations are allowed to take before being considered to have failed."
-  type        = any
-  default     = {}
-}
-
 variable "memberships" {
   description = "(Optional) A list of memberships (id, roles) to get attached to the group resource created."
   type        = any
@@ -70,12 +64,6 @@ variable "memberships" {
   }
 }
 
-variable "membership_timeouts" {
-  description = "(Optional) How long certain operations are allowed to take before being considered to have failed."
-  type        = any
-  default     = {}
-}
-
 # ---------------------------------------------------------------------------------------------------------------------
 # MODULE CONFIGURATION PARAMETERS
 # These variables are used to configure the module.
@@ -85,6 +73,12 @@ variable "module_enabled" {
   type        = bool
   description = "(Optional) Whether to create resources within the module or not. Default is 'true'."
   default     = true
+}
+
+variable "module_timeouts" {
+  description = "(Optional) A map of timeout objects that is keyed by Terraform resource name defining timeouts for `create`, `update` and `delete` Terraform operations."
+  type        = any
+  default     = null
 }
 
 variable "module_depends_on" {
