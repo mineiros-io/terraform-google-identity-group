@@ -24,9 +24,9 @@ resource "google_cloud_identity_group" "group" {
   }
 
   timeouts {
-    create = try(var.group_timeouts.create, "6m")
-    update = try(var.group_timeouts.update, "4m")
-    delete = try(var.group_timeouts.delete, "4m")
+    create = try(var.module_timeouts.google_cloud_identity_group.create, "6m")
+    update = try(var.module_timeouts.google_cloud_identity_group.update, "4m")
+    delete = try(var.module_timeouts.google_cloud_identity_group.delete, "4m")
   }
 }
 
@@ -52,8 +52,8 @@ resource "google_cloud_identity_group_membership" "membership" {
   }
 
   timeouts {
-    create = try(var.membership_timeouts.create, "4m")
-    update = try(var.membership_timeouts.update, "4m")
-    delete = try(var.membership_timeouts.delete, "4m")
+    create = try(var.module_timeouts.google_cloud_identity_group_membership.create, "4m")
+    update = try(var.module_timeouts.google_cloud_identity_group_membership.update, "4m")
+    delete = try(var.module_timeouts.google_cloud_identity_group_membership.delete, "4m")
   }
 }
