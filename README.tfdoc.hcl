@@ -152,14 +152,14 @@ section {
         default     = []
 
         attribute "roles" {
-          required    = true
           type        = list(string)
+          default     = ["MEMBER"]
           description = <<-END
             A list of roles to bind to this Membership. Possible values are `OWNER`, `MANAGER`, and `MEMBER`.
             **Note:** The `OWNER` and `MANAGER` roles are supplementary roles that the `MEMBER` role to be assigned.
           END
 
-        readme_example = <<-END
+          readme_example = <<-END
           roles = ["MEMBER", "MANAGER"]
         END
         }

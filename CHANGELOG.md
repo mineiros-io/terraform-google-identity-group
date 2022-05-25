@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Fixed
 
+- Fix default value for roles in README
 - Fix roles assignment in unit tests
 
 ## [0.0.5]
