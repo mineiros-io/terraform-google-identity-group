@@ -37,8 +37,7 @@ module "test" {
   # add all optional arguments that create additional resources
   memberships = [
     {
-      id   = "testuser@${var.domain}"
-      role = "MEMBER"
+      id = "testuser@${var.domain}"
     }
   ]
 }

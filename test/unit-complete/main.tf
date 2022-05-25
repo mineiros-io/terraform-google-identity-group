@@ -43,8 +43,8 @@ module "test" {
   # add all optional arguments that create additional resources
   memberships = [
     {
-      id   = "testuser@${var.domain}"
-      role = "MAINTAINER"
+      id    = "testuser@${var.domain}"
+      roles = ["MEMBER", "MANAGER"]
     }
   ]
 

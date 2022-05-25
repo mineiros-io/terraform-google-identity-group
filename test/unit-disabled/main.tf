@@ -38,12 +38,12 @@ module "test" {
   # add all optional arguments that create additional resources
   memberships = [
     {
-      id   = "unit-disabled@mineiros.io"
-      role = "MEMBER"
+      id    = "unit-disabled@mineiros.io"
+      roles = ["MEMBER"]
     },
     {
-      id   = "unit-disabled2@mineiros.io"
-      role = "MAINTAINER"
+      id    = "unit-disabled2@mineiros.io"
+      roles = ["MEMBER", "MANAGER"]
     }
   ]
 }
