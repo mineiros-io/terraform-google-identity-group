@@ -110,10 +110,12 @@ See [variables.tf] and [examples/] for details and use-cases.
 
   Each `membership` object in the list accepts the following attributes:
 
-  - [**`roles`**](#attr-memberships-roles): *(**Required** `list(string)`)*<a name="attr-memberships-roles"></a>
+  - [**`roles`**](#attr-memberships-roles): *(Optional `list(string)`)*<a name="attr-memberships-roles"></a>
 
     A list of roles to bind to this Membership. Possible values are `OWNER`, `MANAGER`, and `MEMBER`.
     **Note:** The `OWNER` and `MANAGER` roles are supplementary roles that the `MEMBER` role to be assigned.
+
+    Default is `["MEMBER"]`.
 
     Example:
 
