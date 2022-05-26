@@ -68,6 +68,21 @@ section {
 
         group_key_id = "id-of-entity"
         parent       = "resource-name-of-entity"
+
+        memberships = [
+          {
+            id    = "member@mineiros.io"
+            roles = ["MEMBER"]
+          },
+          {
+            id    = "manager@mineiros.io"
+            roles = ["MEMBER", "MANAGER"]
+          },
+          {
+            id    = "owner@mineiros.io"
+            roles = ["MEMBER", "OWNER"]
+          }
+        ]
       }
       ```
       **NOTE:** Google Groups are an organization level resource and can only be created and managed
@@ -156,7 +171,7 @@ section {
           default     = ["MEMBER"]
           description = <<-END
             A list of roles to bind to this Membership. Possible values are `OWNER`, `MANAGER`, and `MEMBER`.
-            **Note:** The `OWNER` and `MANAGER` roles are supplementary roles that the `MEMBER` role to be assigned.
+            **Note:** The `OWNER` and `MANAGER` roles are supplementary roles that require the `MEMBER` role to be assigned.
           END
 
           readme_example = <<-END

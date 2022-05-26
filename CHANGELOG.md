@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add instructions on how to use memberships to the example in the README
+
 ## [0.0.6]
 
-## Fixed
+### Fixed
 
 - Fix default value for roles in README
 - Fix roles assignment in unit tests
