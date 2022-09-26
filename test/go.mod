@@ -1,4 +1,4 @@
-module github.com/mineiros-io/terraform-module-template/test
+module github.com/mineiros-io/terraform-google-identity-group/test
 
 go 1.14
 
