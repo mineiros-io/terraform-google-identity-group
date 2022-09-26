@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add instructions on how to use memberships to the example in the README
+- Tests added
+- README updated
+
+### Fixed
+
+- `initial_group_config` validation excluded 'INITIAL_GROUP_CONFIG_UNSPECIFIED', now it is accepted
 
 ## [0.0.6]
 
