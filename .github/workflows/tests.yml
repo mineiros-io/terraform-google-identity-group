@@ -41,8 +41,8 @@ jobs:
 
       - name: Set up Terramate
         # for security reasons we pin commit ids and not tags.
-        # mineiros-io/terramate@v0.1.28 -> 8535f918c0905572d846d82aa3d0feee23388f98
-        run: go install github.com/mineiros-io/terramate/cmd/terramate@8535f918c0905572d846d82aa3d0feee23388f98
+        # mineiros-io/terramate@v0.1.32 -> 16ba95d2e4a681245450ceec6667afa33bea2753
+        run: go install github.com/mineiros-io/terramate/cmd/terramate@16ba95d2e4a681245450ceec6667afa33bea2753
         env:
           GOPROXY: direct
 
@@ -58,7 +58,7 @@ jobs:
         # hashicorp/setup-terraform@v2.0.0 -> 17d4c9b8043b238f6f35641cdd8433da1e6f3867
         uses: hashicorp/setup-terraform@17d4c9b8043b238f6f35641cdd8433da1e6f3867
         with:
-          terraform_version: 1.2.1
+          terraform_version: 1.3.0
           terraform_wrapper: false
 
       - name: Setup TFLint
@@ -66,7 +66,7 @@ jobs:
         # terraform-linters/setup-tflint@v2.0.0 -> 9e653e0f7de0839150e03280e0981e0c25eaf10a
         uses: terraform-linters/setup-tflint@9e653e0f7de0839150e03280e0981e0c25eaf10a
         with:
-          tflint_version: v0.29.0
+          tflint_version: v0.41.0
 
       - name: Setup and run pre-commit
         # for security reasons we pin commit ids and not tags.
