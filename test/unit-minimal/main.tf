@@ -2,7 +2,7 @@ module "test" {
   source = "../.."
 
   # add all required arguments
-  parent       = "customers/${local.org_directory_customer_id}"
+  parent       = "customers/${local.directory_customer_id}"
   display_name = "unit-minimal"
   group_key_id = "unit-minimal@${local.org_domain}"
 

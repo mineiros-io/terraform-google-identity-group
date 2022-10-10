@@ -5,12 +5,15 @@ module "test" {
 
   # add all required arguments
 
-  parent       = "customers/${local.org_directory_customer_id}"
+  parent       = "customers/${local.directory_customer_id}"
   group_key_id = "unit-complete@${local.org_domain}"
 
   # add most/all other optional arguments
-  display_name = "UnitComplete"
-  description  = "A google identity group created by an automated unit test."
+  display_name         = "UnitComplete"
+  description          = "A google identity group created by an automated unit test."
+  labels               = { "cloudidentity.googleapis.com/groups.discussion_forum" : "" }
+  initial_group_config = "INITIAL_GROUP_CONFIG_UNSPECIFIED"
+  group_key_namespace  = "identitysources/identity_source_id"
 
   # add all optional arguments that create additional resources
   memberships = [

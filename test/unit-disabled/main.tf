@@ -4,7 +4,7 @@ module "test" {
   module_enabled = false
 
   # add all required arguments
-  parent       = "customers/${local.org_directory_customer_id}"
+  parent       = "customers/${local.directory_customer_id}"
   group_key_id = "unit-disabled@${local.org_domain}"
 
   # add all optional arguments that create additional resources

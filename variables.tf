@@ -42,8 +42,8 @@ variable "initial_group_config" {
   default     = "EMPTY"
 
   validation {
-    condition     = contains(["WITH_INITIAL_OWNER", "EMPTY"], var.initial_group_config)
-    error_message = "The value must only be one of these valid values: WITH_INITIAL_OWNER, and EMPTY."
+    condition     = contains(["WITH_INITIAL_OWNER", "EMPTY", "INITIAL_GROUP_CONFIG_UNSPECIFIED"], var.initial_group_config)
+    error_message = "The value must only be one of these valid values: WITH_INITIAL_OWNER, INITIAL_GROUP_CONFIG_UNSPECIFIED and EMPTY."
   }
 }
 
@@ -59,7 +59,7 @@ variable "memberships" {
   default     = []
 
   validation {
-    condition     = var.memberships == [] ? true : alltrue([for x in var.memberships : x.id != null && x.id != "" ? true : false])
+    condition     = length(var.memberships) == 0 ? true : alltrue([for x in var.memberships : x.id != null && x.id != "" ? true : false])
     error_message = "All memberships must have an id defined."
   }
 }

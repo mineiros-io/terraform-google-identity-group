@@ -10,6 +10,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add instructions on how to use memberships to the example in the README
+- Add unit tests
+
+### Fixed
+
+- Fix `initial_group_config` validation to include 'INITIAL_GROUP_CONFIG_UNSPECIFIED'
+
+### Removed
+
+- BREAKING: Remove support for Terraform versions before v1.0
+- BREAKING: Remove support for Terraform Google Provider versions before v4.0
 
 ## [0.0.6]
 
