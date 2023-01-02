@@ -160,11 +160,29 @@ section {
       }
 
       variable "memberships" {
-        type        = list(membership)
-        description = <<-END
+        type           = list(membership)
+        description    = <<-END
           A list of memberships (id, roles) to get attached to the group resource created.
         END
-        default     = []
+        readme_example = <<-END
+          memberships = [
+            {
+              id = "user@example.com"
+              roles = ["MEMBER", "MANAGER"]
+            }
+          ]
+        END
+        default        = []
+
+        attribute "id" {
+          required    = true
+          type        = string
+          description = <<-END
+            The id of the entity. For Google-managed entities, the id must be
+            the email address of an existing group or user. For external-identity-mapped
+            entities, the id must be a string conforming to the identity source's requirements.
+          END
+        }
 
         attribute "roles" {
           type        = list(string)
@@ -173,10 +191,6 @@ section {
             A list of roles to bind to this Membership. Possible values are `OWNER`, `MANAGER`, and `MEMBER`.
             **Note:** The `OWNER` and `MANAGER` roles are supplementary roles that require the `MEMBER` role to be assigned.
           END
-
-          readme_example = <<-END
-          roles = ["MEMBER", "MANAGER"]
-        END
         }
       }
     }

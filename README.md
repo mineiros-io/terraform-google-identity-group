@@ -123,7 +123,24 @@ See [variables.tf] and [examples/] for details and use-cases.
 
   Default is `[]`.
 
+  Example:
+
+  ```hcl
+  memberships = [
+    {
+      id = "user@example.com"
+      roles = ["MEMBER", "MANAGER"]
+    }
+  ]
+  ```
+
   Each `membership` object in the list accepts the following attributes:
+
+  - [**`id`**](#attr-memberships-id): *(**Required** `string`)*<a name="attr-memberships-id"></a>
+
+    The id of the entity. For Google-managed entities, the id must be
+    the email address of an existing group or user. For external-identity-mapped
+    entities, the id must be a string conforming to the identity source's requirements.
 
   - [**`roles`**](#attr-memberships-roles): *(Optional `list(string)`)*<a name="attr-memberships-roles"></a>
 
@@ -131,12 +148,6 @@ See [variables.tf] and [examples/] for details and use-cases.
     **Note:** The `OWNER` and `MANAGER` roles are supplementary roles that require the `MEMBER` role to be assigned.
 
     Default is `["MEMBER"]`.
-
-    Example:
-
-    ```hcl
-    roles = ["MEMBER", "MANAGER"]
-    ```
 
 ### Module Configuration
 
