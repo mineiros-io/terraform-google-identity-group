@@ -123,6 +123,7 @@ section {
       }
 
       variable "labels" {
+        required    = true
         type        = map(string)
         default     = { "cloudidentity.googleapis.com/groups.discussion_forum" : "" }
         description = <<-END

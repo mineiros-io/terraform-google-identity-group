@@ -76,6 +76,8 @@ ifdef GITHUB_OWNER
   DOCKER_GITHUB_FLAGS += -e GITHUB_OWNER
 endif
 
+MAKE_TESTS_CMD = $(if $(USE_TEST_MOCKS),test/mock-unit-tests,test/unit-tests)
+
 .PHONY: default
 default: help
 
@@ -104,7 +106,7 @@ test/docker/unit-tests: DOCKER_FLAGS += -e NOCOLOR=1
 test/docker/unit-tests: TEST ?= "TestUnit"
 test/docker/unit-tests:
 	@echo "${YELLOW}[TEST] ${GREEN}Start Running Go Tests in Docker Container.${RESET}"
-	$(call docker-run,make test/unit-tests)
+	$(call docker-run,make $(MAKE_TESTS_CMD))
 
 ## Run pre-commit hooks.
 .PHONY: test/pre-commit
@@ -113,11 +115,18 @@ test/pre-commit:
 	$(call quiet-command,pre-commit run -a)
 
 ## Run all unit tests.
-.PHONY: test/docker/unit-tests
+.PHONY: test/unit-tests
 test/unit-tests: TEST ?= "TestUnit"
 test/unit-tests:
 	@echo "${YELLOW}[TEST] ${GREEN}Start Running unit tests.${RESET}"
 	$(call quiet-command,cd test ; go test -v -count 1 -timeout 45m -parallel 128 -run $(TEST))
+
+## Run all mock unit tests.
+.PHONY: test/mock-unit-tests
+test/mock-unit-tests: TEST ?= "MockTestUnit"
+test/mock-unit-tests:
+	@echo "${YELLOW}[TEST] ${GREEN}Start Running mock unit tests.${RESET}"
+	$(call quiet-command, terraform test)
 
 ## Generate README.md with Terradoc
 .PHONY: terradoc

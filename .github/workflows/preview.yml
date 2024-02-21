@@ -83,7 +83,12 @@ jobs:
         with:
           go-version: 1.22.0
 
+      - name: Run Mock Unit Tests
+        run: make test/mock-unit-tests
+
       - name: Run Unit Tests
+        if: |
+          github.event.pull_request.head.repo.fork == false
         run: make test/unit-tests
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.MINEIROS_TESTING_GCP_SA_KEY_FILE }}

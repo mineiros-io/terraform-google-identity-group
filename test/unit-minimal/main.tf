@@ -5,6 +5,7 @@ module "test" {
   parent       = "customers/${local.directory_customer_id}"
   display_name = "unit-minimal"
   group_key_id = "unit-minimal@${local.org_domain}"
+  labels       = { "cloudidentity.googleapis.com/groups.discussion_forum" : "" }
 
   # add all optional arguments that create additional resources
   memberships = [
