@@ -13,16 +13,16 @@ variable "parent" {
   type        = string
 }
 
-# ---------------------------------------------------------------------------------------------------------------------
-# OPTIONAL VARIABLES
-# These variables have defaults, but may be overridden.
-# ---------------------------------------------------------------------------------------------------------------------
-
 variable "labels" {
   description = "(Optional) The labels that apply to the Group. Must not contain more than one entry. Must contain the entry 'cloudidentity.googleapis.com/groups.discussion_forum': '' if the Group is a Google Group or 'system/groups/external': '' if the Group is an external-identity-mapped group."
   type        = map(string)
   default     = { "cloudidentity.googleapis.com/groups.discussion_forum" : "" }
 }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# OPTIONAL VARIABLES
+# These variables have defaults, but may be overridden.
+# ---------------------------------------------------------------------------------------------------------------------
 
 variable "display_name" {
   description = "(Optional) The display name of the Group."
